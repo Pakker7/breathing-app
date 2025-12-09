@@ -3,7 +3,9 @@ package com.breathing.app.screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
@@ -55,17 +57,19 @@ fun ConfigurationScreen(
                     )
                 )
             )
-            .padding(20.dp)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp, vertical = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Settings Button
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 16.dp),
+                    .padding(top = 48.dp, bottom = 4.dp),
                 horizontalArrangement = Arrangement.End
             ) {
                 IconButton(onClick = { showSettingsDialog = true }) {
@@ -77,23 +81,20 @@ fun ConfigurationScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
-
             // Title
             Text(
-                text = "호흡 설정 🫁",
-                fontSize = 32.sp,
+                text = "호흡 설정",
+                fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = Color.White,
+                modifier = Modifier.padding(bottom = 16.dp)
             )
-
-            Spacer(modifier = Modifier.height(40.dp))
 
             // Card Container
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(bottom = 16.dp),
                 shape = RoundedCornerShape(20.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = Color.White.copy(alpha = 0.1f)
@@ -102,7 +103,7 @@ fun ConfigurationScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(24.dp)
+                        .padding(20.dp)
                 ) {
                     // Preset Dropdown
                     var expanded by remember { mutableStateOf(false) }
@@ -151,7 +152,7 @@ fun ConfigurationScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     // Number Inputs
                     NumberInput(
@@ -224,7 +225,7 @@ fun ConfigurationScreen(
                         }
                     )
 
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     // Quick Select
                     Text(
@@ -260,7 +261,7 @@ fun ConfigurationScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
 
                     // Save Preset Button
                     Button(
@@ -274,7 +275,7 @@ fun ConfigurationScreen(
                         Text("💾 프리셋 저장하기", color = Color.White)
                     }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     // Start Button
                     Button(
@@ -303,7 +304,7 @@ fun ConfigurationScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     // History Button
                     OutlinedButton(

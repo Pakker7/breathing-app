@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">호흡 운동</string>
+    <string name="app_name">호흡법 운동</string>
     
     <!-- Configuration Screen -->
     <string name="breathing_config">호흡 설정 🫁</string>
