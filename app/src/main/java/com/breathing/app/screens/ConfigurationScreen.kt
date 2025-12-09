@@ -1,5 +1,6 @@
 package com.breathing.app.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +21,7 @@ import com.breathing.app.models.BreathingConfig
 import com.breathing.app.models.Preset
 import com.breathing.app.models.AudioSettings
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConfigurationScreen(
     presets: List<Preset>,

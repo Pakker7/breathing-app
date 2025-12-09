@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.breathing.app.models.BreathingConfig
 import com.breathing.app.utils.DateUtils
+import androidx.compose.foundation.BorderStroke
 
 @Composable
 fun CompletionScreen(

@@ -7,6 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -67,12 +72,12 @@ class MainActivity : ComponentActivity() {
         val navController = rememberNavController()
         val viewModel: BreathingViewModel = viewModel { BreathingViewModel(dataStore) }
         
-        val currentConfig = viewModel.currentConfig.collectAsState().value
-        val presets = viewModel.presets.collectAsState().value
-        val audioSettings = viewModel.audioSettings.collectAsState().value
+        val currentConfig by viewModel.currentConfig.collectAsState()
+        val presets by viewModel.presets.collectAsState()
+        val audioSettings by viewModel.audioSettings.collectAsState()
         
         // Update audio manager when settings change
-        androidx.compose.runtime.LaunchedEffect(audioSettings) {
+        LaunchedEffect(audioSettings) {
             audioManager.updateSettings(audioSettings)
         }
 
@@ -145,8 +150,8 @@ class MainActivity : ComponentActivity() {
                 val duration = backStackEntry.arguments?.getInt("duration") ?: 0
                 
                 // Get today's session count
-                var todaySessionCount by androidx.compose.runtime.mutableStateOf(0)
-                androidx.compose.runtime.LaunchedEffect(Unit) {
+                var todaySessionCount by mutableStateOf(0)
+                LaunchedEffect(Unit) {
                     val history = dataStore.getHistory()
                     val today = java.util.Date()
                     todaySessionCount = history.count { record ->
@@ -182,9 +187,9 @@ class MainActivity : ComponentActivity() {
             }
 
             composable(Screen.History.route) {
-                var history by androidx.compose.runtime.mutableStateOf<List<SessionRecord>>(emptyList())
+                var history by mutableStateOf<List<SessionRecord>>(emptyList())
                 
-                androidx.compose.runtime.LaunchedEffect(Unit) {
+                LaunchedEffect(Unit) {
                     history = dataStore.getHistory()
                 }
                 

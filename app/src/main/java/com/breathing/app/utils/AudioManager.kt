@@ -3,6 +3,7 @@ package com.breathing.app.utils
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.SoundPool
+import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import com.breathing.app.models.AudioSettings
 import kotlinx.coroutines.CoroutineScope
@@ -54,8 +55,9 @@ class AudioManager(private val context: Context) : TextToSpeech.OnInitListener {
         tts?.let {
             it.setSpeechRate(0.9f)
             it.setPitch(1.0f)
-            it.setVolume(audioSettings.volume / 100f, audioSettings.volume / 100f)
-            it.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+            val params = Bundle()
+            params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, audioSettings.volume / 100f)
+            it.speak(text, TextToSpeech.QUEUE_FLUSH, params, null)
         }
     }
 

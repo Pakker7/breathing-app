@@ -28,6 +28,7 @@ import com.breathing.app.models.AudioSettings
 import com.breathing.app.utils.AudioManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import androidx.compose.foundation.BorderStroke
 
 enum class BreathState {
     IDLE, INHALE, HOLD, EXHALE

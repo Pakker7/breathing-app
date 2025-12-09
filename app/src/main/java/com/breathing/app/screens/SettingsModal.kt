@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.breathing.app.models.AudioSettings
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsModal(
     audioSettings: AudioSettings,
