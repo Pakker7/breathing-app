@@ -3,10 +3,12 @@ package com.breathing.app.screens
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Refresh
@@ -179,14 +181,6 @@ fun BreathingScreen(
                         imageVector = Icons.Default.VolumeUp,
                         contentDescription = "음량 조절",
                         tint = Color.White
-                    )
-                }
-                if (showVolumeControl) {
-                    VolumeControl(
-                        settings = audioSettings,
-                        onSettingsChange = onAudioSettingsChange,
-                        onDismiss = { showVolumeControl = false },
-                        modifier = Modifier.align(Alignment.TopEnd)
                     )
                 }
             }
@@ -394,64 +388,88 @@ fun BreathingScreen(
                 }
             }
         }
-    }
-}
-
-@Composable
-fun VolumeControl(
-    settings: AudioSettings,
-    onSettingsChange: (AudioSettings) -> Unit,
-    onDismiss: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .width(160.dp)
-            .padding(8.dp),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White.copy(alpha = 0.95f)
-        )
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Icon(
-                imageVector = Icons.Default.VolumeUp,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp),
-                tint = Color.Gray
-            )
-            Spacer(modifier = Modifier.height(12.dp))
-            Text(
-                text = "${settings.volume}%",
-                fontSize = 12.sp,
-                color = Color.Gray
-            )
-            Slider(
-                value = settings.volume.toFloat(),
-                onValueChange = { value ->
-                    onSettingsChange(settings.copy(volume = value.toInt()))
-                },
-                valueRange = 0f..100f,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+        
+        // Volume Control Modal - 최상위 레이어에 오버레이
+        if (showVolumeControl) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.3f))
+                    .clickable(onClick = { showVolumeControl = false }),
+                contentAlignment = Alignment.TopEnd
             ) {
-                Text("음성", fontSize = 14.sp, color = Color.Gray)
-                Switch(
-                    checked = settings.voiceGuide,
-                    onCheckedChange = { checked ->
-                        onSettingsChange(settings.copy(voiceGuide = checked))
+                Card(
+                    modifier = Modifier
+                        .width(200.dp)
+                        .padding(top = 60.dp, end = 16.dp)
+                        .clickable(enabled = false, onClick = {}),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color.White.copy(alpha = 0.95f)
+                    ),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        // Header with Close button
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.VolumeUp,
+                                contentDescription = null,
+                                modifier = Modifier.size(24.dp),
+                                tint = Color.Gray
+                            )
+                            IconButton(
+                                onClick = { showVolumeControl = false },
+                                modifier = Modifier.size(24.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = "닫기",
+                                    tint = Color.Gray,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            }
+                        }
+                        
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(
+                            text = "${audioSettings.volume}%",
+                            fontSize = 12.sp,
+                            color = Color.Gray
+                        )
+                        Slider(
+                            value = audioSettings.volume.toFloat(),
+                            onValueChange = { value ->
+                                onAudioSettingsChange(audioSettings.copy(volume = value.toInt()))
+                            },
+                            valueRange = 0f..100f,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text("음성", fontSize = 14.sp, color = Color.Gray)
+                            Switch(
+                                checked = audioSettings.voiceGuide,
+                                onCheckedChange = { checked ->
+                                    onAudioSettingsChange(audioSettings.copy(voiceGuide = checked))
+                                }
+                            )
+                        }
                     }
-                )
+                }
             }
         }
     }
