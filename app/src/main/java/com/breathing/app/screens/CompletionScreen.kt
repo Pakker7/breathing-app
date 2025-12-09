@@ -131,7 +131,7 @@ fun CompletionScreen(
                             .padding(vertical = 14.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text("🔄 다시 하기", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                        Text("다시 하기", fontSize = 18.sp, fontWeight = FontWeight.Bold)
                     }
                 }
 
@@ -144,7 +144,7 @@ fun CompletionScreen(
                     ),
                     border = BorderStroke(1.dp, Color.White.copy(alpha = 0.3f))
                 ) {
-                    Text("🏠 홈으로")
+                    Text("홈으로")
                 }
 
                 OutlinedButton(
@@ -156,7 +156,7 @@ fun CompletionScreen(
                     ),
                     border = BorderStroke(1.dp, Color.White.copy(alpha = 0.2f))
                 ) {
-                    Text("📊 전체 기록 보기", color = Color.White.copy(alpha = 0.8f))
+                    Text("전체 기록 보기", color = Color.White.copy(alpha = 0.8f))
                 }
             }
         }

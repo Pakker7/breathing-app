@@ -62,14 +62,14 @@ fun ConfigurationScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(horizontal = 14.dp, vertical = 7.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Settings Button
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 48.dp, bottom = 4.dp),
+                    .padding(top = 43.dp, bottom = 2.dp),
                 horizontalArrangement = Arrangement.End
             ) {
                 IconButton(onClick = { showSettingsDialog = true }) {
@@ -84,18 +84,18 @@ fun ConfigurationScreen(
             // Title
             Text(
                 text = "호흡 설정",
-                fontSize = 28.sp,
+                fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
-                modifier = Modifier.padding(bottom = 16.dp)
+                modifier = Modifier.padding(bottom = 14.dp)
             )
 
             // Card Container
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                shape = RoundedCornerShape(20.dp),
+                    .padding(bottom = 14.dp),
+                shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = Color.White.copy(alpha = 0.1f)
                 )
@@ -103,7 +103,7 @@ fun ConfigurationScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(20.dp)
+                        .padding(18.dp)
                 ) {
                     // Preset Dropdown
                     var expanded by remember { mutableStateOf(false) }
@@ -152,7 +152,7 @@ fun ConfigurationScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(14.dp))
 
                     // Number Inputs
                     NumberInput(
@@ -171,7 +171,7 @@ fun ConfigurationScreen(
                         }
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(11.dp))
 
                     NumberInput(
                         label = "멈춤:",
@@ -189,7 +189,7 @@ fun ConfigurationScreen(
                         }
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(11.dp))
 
                     NumberInput(
                         label = "날숨:",
@@ -207,7 +207,7 @@ fun ConfigurationScreen(
                         }
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(11.dp))
 
                     NumberInput(
                         label = "세트:",
@@ -225,15 +225,15 @@ fun ConfigurationScreen(
                         }
                     )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(14.dp))
 
                     // Quick Select
                     Text(
                         text = "빠른 선택",
-                        fontSize = 12.sp,
+                        fontSize = 11.sp,
                         color = Color.White.copy(alpha = 0.7f)
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(7.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -251,7 +251,7 @@ fun ConfigurationScreen(
                                     onConfigChange(config)
                                 },
                                 modifier = Modifier.weight(1f),
-                                shape = RoundedCornerShape(18.dp),
+                                shape = RoundedCornerShape(16.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Color.White.copy(alpha = 0.15f)
                                 )
@@ -261,27 +261,27 @@ fun ConfigurationScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(11.dp))
 
                     // Save Preset Button
                     Button(
                         onClick = { showSaveDialog = true },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(11.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.White.copy(alpha = 0.15f)
                         )
                     ) {
-                        Text("💾 프리셋 저장하기", color = Color.White)
+                        Text("프리셋 저장하기", color = Color.White)
                     }
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(9.dp))
 
                     // Start Button
                     Button(
                         onClick = onStart,
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(28.dp),
+                        shape = RoundedCornerShape(25.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Transparent
                         )
@@ -297,26 +297,26 @@ fun ConfigurationScreen(
                                         )
                                     )
                                 )
-                                .padding(vertical = 14.dp),
+                                .padding(vertical = 12.dp),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text("🫁 호흡 시작하기", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                            Text("호흡 시작하기", fontSize = 16.sp, fontWeight = FontWeight.Bold)
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(9.dp))
 
                     // History Button
                     OutlinedButton(
                         onClick = onShowHistory,
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(24.dp),
+                        shape = RoundedCornerShape(22.dp),
                         colors = ButtonDefaults.outlinedButtonColors(
                             contentColor = Color.White
                         ),
                         border = BorderStroke(1.dp, Color.White.copy(alpha = 0.3f))
                     ) {
-                        Text("📊 기록 보기")
+                        Text("기록 보기")
                     }
                 }
             }
@@ -337,17 +337,17 @@ fun ConfigurationScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(24.dp)
+                            .padding(22.dp)
                     ) {
                         Text(
                             text = "프리셋 저장",
-                            fontSize = 24.sp,
+                            fontSize = 22.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = androidx.compose.ui.text.style.TextAlign.Center
                         )
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(22.dp))
                         OutlinedTextField(
                             value = presetName,
                             onValueChange = { presetName = it },
@@ -360,10 +360,10 @@ fun ConfigurationScreen(
                                 focusedTextColor = Color.White
                             )
                         )
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(22.dp))
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            horizontalArrangement = Arrangement.spacedBy(11.dp)
                         ) {
                             OutlinedButton(
                                 onClick = { showSaveDialog = false },
@@ -374,7 +374,7 @@ fun ConfigurationScreen(
                             ) {
                                 Text("취소")
                             }
-                            Button(
+                            OutlinedButton(
                                 onClick = {
                                     if (presetName.isNotBlank()) {
                                         onSavePreset(presetName)
@@ -384,26 +384,11 @@ fun ConfigurationScreen(
                                 },
                                 modifier = Modifier.weight(1f),
                                 enabled = presetName.isNotBlank(),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color.Transparent
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    contentColor = Color.White
                                 )
                             ) {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .background(
-                                            brush = Brush.horizontalGradient(
-                                                colors = listOf(
-                                                    Color(0xFF4ade80),
-                                                    Color(0xFF22d3ee)
-                                                )
-                                            )
-                                        )
-                                        .padding(vertical = 12.dp),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Text("저장", fontWeight = FontWeight.Bold)
-                                }
+                                Text("저장")
                             }
                         }
                     }
@@ -438,15 +423,15 @@ fun NumberInput(
         Text(
             text = label,
             color = Color.White,
-            modifier = Modifier.width(60.dp)
+            modifier = Modifier.width(54.dp)
         )
         Box(
             modifier = Modifier
                 .weight(1f)
-                .height(48.dp)
-                .clip(RoundedCornerShape(8.dp))
+                .height(43.dp)
+                .clip(RoundedCornerShape(7.dp))
                 .background(Color.White.copy(alpha = 0.2f))
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 14.dp),
             contentAlignment = Alignment.Center
         ) {
             Row(
@@ -455,14 +440,14 @@ fun NumberInput(
             ) {
                 Text(
                     text = value.toString(),
-                    fontSize = 24.sp,
+                    fontSize = 22.sp,
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
                     text = unit,
-                    fontSize = 14.sp,
+                    fontSize = 13.sp,
                     color = Color.White.copy(alpha = 0.8f)
                 )
             }
@@ -470,24 +455,24 @@ fun NumberInput(
         IconButton(
             onClick = onDecrement,
             modifier = Modifier
-                .size(40.dp)
+                .size(36.dp)
                 .background(
                     Color.White.copy(alpha = 0.15f),
-                    RoundedCornerShape(20.dp)
+                    RoundedCornerShape(18.dp)
                 )
         ) {
-            Text("-", color = Color.White, fontSize = 20.sp)
+            Text("-", color = Color.White, fontSize = 18.sp)
         }
         IconButton(
             onClick = onIncrement,
             modifier = Modifier
-                .size(40.dp)
+                .size(36.dp)
                 .background(
                     Color.White.copy(alpha = 0.15f),
-                    RoundedCornerShape(20.dp)
+                    RoundedCornerShape(18.dp)
                 )
         ) {
-            Text("+", color = Color.White, fontSize = 20.sp)
+            Text("+", color = Color.White, fontSize = 18.sp)
         }
     }
 }

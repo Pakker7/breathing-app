@@ -43,7 +43,7 @@ fun BreathingScreen(
     onBack: () -> Unit,
     onAudioSettingsChange: (AudioSettings) -> Unit
 ) {
-    var state by remember { mutableStateOf(BreathState.INHALE) }
+    var state by remember { mutableStateOf(BreathState.IDLE) }
     var currentSet by remember { mutableStateOf(1) }
     var counter by remember { mutableStateOf(config.inhale) }
     var isPaused by remember { mutableStateOf(false) }
@@ -52,16 +52,26 @@ fun BreathingScreen(
     val startTime = remember { System.currentTimeMillis() }
     val scope = rememberCoroutineScope()
 
-    // Animation for breathing circle
+    // Animation for breathing circle - start small
     val scale = remember {
-        Animatable(
-            if (state == BreathState.INHALE || state == BreathState.HOLD) 1.5f else 1f
+        Animatable(0.8f)
+    }
+    
+    // Start breathing animation on initial load
+    LaunchedEffect(Unit) {
+        delay(500) // Small delay to show initial state
+        state = BreathState.INHALE
+        scale.animateTo(
+            targetValue = 1.2f,
+            animationSpec = tween(durationMillis = 1000, easing = LinearEasing)
         )
+        audioManager.playTransitionSound("inhale")
+        audioManager.speak("들이쉬세요")
     }
 
     LaunchedEffect(state) {
         if (!isPaused) {
-            val targetScale = if (state == BreathState.INHALE || state == BreathState.HOLD) 1.5f else 1f
+            val targetScale = if (state == BreathState.INHALE || state == BreathState.HOLD) 1.2f else 0.8f
             scale.animateTo(
                 targetValue = targetScale,
                 animationSpec = tween(durationMillis = 1000, easing = LinearEasing)
@@ -109,11 +119,6 @@ fun BreathingScreen(
         }
     }
 
-    // Initial start
-    LaunchedEffect(Unit) {
-        audioManager.playTransitionSound("inhale")
-        audioManager.speak("들이쉬세요")
-    }
 
     val stateText = when {
         isPaused -> "정지되었습니다"
@@ -150,8 +155,8 @@ fun BreathingScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                    .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 5.dp),
+                horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -160,22 +165,29 @@ fun BreathingScreen(
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
-                Box {
-                    IconButton(onClick = { showVolumeControl = !showVolumeControl }) {
-                        Icon(
-                            imageVector = Icons.Default.VolumeUp,
-                            contentDescription = "음량 조절",
-                            tint = Color.White
-                        )
-                    }
-                    if (showVolumeControl) {
-                        VolumeControl(
-                            settings = audioSettings,
-                            onSettingsChange = onAudioSettingsChange,
-                            onDismiss = { showVolumeControl = false },
-                            modifier = Modifier.align(Alignment.TopEnd)
-                        )
-                    }
+            }
+            
+            // Volume Control Button (separated)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end = 16.dp),
+                contentAlignment = Alignment.TopEnd
+            ) {
+                IconButton(onClick = { showVolumeControl = !showVolumeControl }) {
+                    Icon(
+                        imageVector = Icons.Default.VolumeUp,
+                        contentDescription = "음량 조절",
+                        tint = Color.White
+                    )
+                }
+                if (showVolumeControl) {
+                    VolumeControl(
+                        settings = audioSettings,
+                        onSettingsChange = onAudioSettingsChange,
+                        onDismiss = { showVolumeControl = false },
+                        modifier = Modifier.align(Alignment.TopEnd)
+                    )
                 }
             }
 
@@ -192,7 +204,7 @@ fun BreathingScreen(
                 ) {
                     Box(
                         modifier = Modifier
-                            .size(200.dp)
+                            .size(160.dp)
                             .scale(scale.value)
                             .border(
                                 width = 4.dp,
@@ -204,7 +216,7 @@ fun BreathingScreen(
                         // Empty circle
                     }
 
-                    Spacer(modifier = Modifier.height(40.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     // Status Text
                     Text(
@@ -212,7 +224,7 @@ fun BreathingScreen(
                         fontSize = 24.sp,
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(vertical = 20.dp)
+                        modifier = Modifier.padding(vertical = 16.dp)
                     )
 
                     // Counter
@@ -229,7 +241,7 @@ fun BreathingScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 32.dp),
+                    .padding(horizontal = 20.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 OutlinedButton(

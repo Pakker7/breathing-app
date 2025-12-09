@@ -102,7 +102,7 @@ fun HistoryScreen(
                 // Weekly Stats
                 item {
                     Text(
-                        text = "📊 이번 주 통계",
+                        text = "이번 주 통계",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White,
@@ -145,7 +145,7 @@ fun HistoryScreen(
                 item {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "📅 최근 기록",
+                        text = "최근 기록",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White,
