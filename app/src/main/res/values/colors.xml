@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- App Colors -->
+    <color name="gradient_start">#667eea</color>
+    <color name="gradient_end">#764ba2</color>
+    <color name="inhale_color">#4ade80</color>
+    <color name="hold_color">#fbbf24</color>
+    <color name="exhale_color">#f87171</color>
+    <color name="stop_color">#ff6b6b</color>
+    
+    <!-- Launcher Icon Colors -->
+    <color name="ic_launcher_background">#667eea</color>
+</resources>
+
