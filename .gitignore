@@ -1,0 +1,37 @@
+# Gradle
+.gradle/
+build/
+*/build/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.iws
+/out/
+
+# 로컬 환경 파일
+local.properties
+
+# 빌드 결과물
+*.apk
+*.ap_
+*.aab
+*.dex
+out/
+captures/
+
+# 네이티브 빌드
+.externalNativeBuild/
+.cxx/
+obj/
+
+# 키스토어 (절대 올리면 안 됨)
+*.jks
+*.keystore
+
+# 로그 / 프로파일링
+*.log
+*.hprof
+
+# Google 서비스 키 (팀 정책에 따라)
+google-services.json
