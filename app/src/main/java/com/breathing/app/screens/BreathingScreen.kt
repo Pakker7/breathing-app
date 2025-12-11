@@ -153,89 +153,94 @@ fun BreathingScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Status Bar
-            Row(
+            // Header with Status and Volume
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 5.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(top = 48.dp)
             ) {
+                // Status Bar - 가운데
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 12.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "$currentSet/${config.sets} 세트",
+                        fontSize = 20.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                
+                // Volume Control Button - 오른쪽
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(end = 16.dp),
+                    contentAlignment = Alignment.TopEnd
+                ) {
+                    IconButton(onClick = { showVolumeControl = !showVolumeControl }) {
+                        Icon(
+                            imageVector = Icons.Default.VolumeUp,
+                            contentDescription = "음량 조절",
+                            tint = Color.White
+                        )
+                    }
+                }
+            }
+
+            // Breathing Circle - 세트와 가까이
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(160.dp)
+                        .scale(scale.value)
+                        .border(
+                            width = 4.dp,
+                            color = circleColor,
+                            shape = CircleShape
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    // Empty circle
+                }
+
+                Spacer(modifier = Modifier.height(6.dp))
+
+                // Status Text
                 Text(
-                    text = "$currentSet/${config.sets} 세트",
-                    fontSize = 20.sp,
+                    text = stateText,
+                    fontSize = 24.sp,
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 6.dp)
+                )
+
+                // Counter
+                Text(
+                    text = counter.toString(),
+                    fontSize = 72.sp,
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
             }
             
-            // Volume Control Button (separated)
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(end = 16.dp),
-                contentAlignment = Alignment.TopEnd
-            ) {
-                IconButton(onClick = { showVolumeControl = !showVolumeControl }) {
-                    Icon(
-                        imageVector = Icons.Default.VolumeUp,
-                        contentDescription = "음량 조절",
-                        tint = Color.White
-                    )
-                }
-            }
-
-            // Breathing Circle
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(160.dp)
-                            .scale(scale.value)
-                            .border(
-                                width = 4.dp,
-                                color = circleColor,
-                                shape = CircleShape
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        // Empty circle
-                    }
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    // Status Text
-                    Text(
-                        text = stateText,
-                        fontSize = 24.sp,
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(vertical = 16.dp)
-                    )
-
-                    // Counter
-                    Text(
-                        text = counter.toString(),
-                        fontSize = 72.sp,
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
+            // Spacer - 최소한만 사용 (간격 줄이기)
+            Spacer(modifier = Modifier.height(24.dp))
 
             // Control Buttons
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 16.dp),
+                    .padding(start = 20.dp, end = 20.dp, bottom = 24.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 OutlinedButton(
@@ -474,4 +479,3 @@ fun BreathingScreen(
         }
     }
 }
-
